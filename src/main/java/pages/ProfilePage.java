@@ -1,5 +1,6 @@
 package pages;
 
+import bases.BasePage;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;

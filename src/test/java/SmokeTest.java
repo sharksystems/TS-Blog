@@ -1,41 +1,48 @@
 
+import bases.BaseTest;
+import elements.Sidebar;
 import org.testng.annotations.Test;
 import pages.*;
 import utilities.RandomUser;
 
 
 public class SmokeTest extends BaseTest {
+    Sidebar sidebar = new Sidebar();
 
     @Test
-    public void registrationLogoutLogin () {
+    public void registrationLogoutLogin() {
+        var user = new RandomUser();
 
-        RandomUser user = new RandomUser();
+        sidebar.clickLoginBtn();
 
-        HomePage homePage = new HomePage();
-        homePage.clickLoginBtn();
         new LoginPage().clickRegisterFormBtn();
+
         new RegisterPage()
                 .enterUserName(user.getUsername())
                 .enterEmail(user.getEmail())
                 .enterPassword(user.getPassword())
                 .enterConfirmPassword(user.getPassword())
-                .clickRegisterSubmitBtn()
-                .clickLogoutBtn();
-        homePage.clickLoginBtn();
+                .clickRegisterSubmitBtn();
+
+        sidebar.clickLogoutBtn()
+                .clickLoginBtn();
+
         new LoginPage()
                 .enterUsername(user.getUsername())
                 .enterPassword(user.getPassword())
                 .clickLoginSubmitBnt();
-        homePage.clickProfileBtn();
+
+        sidebar.clickProfileBtn();
+
         new ProfilePage()
                 .clickSettingsMenuBtn()
                 .clickMyAccountMenuOption();
-        new MyAccountPage()
+
+        new DeleteAccountModule()
                 .clickDeleteAccountBtn()
-                .enterDeleteConfirmPassword(user.getPassword())
-                .clickDeleteSubmitBtn()
-                .assertProfileBtnNotVisible();
+                .fillPasswordField(user.getPassword())
+                .clickDeleteSubmitBtn();
 
+        sidebar.assertProfileBtnNotVisible();
     }
-
 }
