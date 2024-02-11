@@ -1,5 +1,7 @@
 
 import bases.BaseTest;
+import com.codeborne.selenide.Selenide;
+import elements.Calendar;
 import elements.Sidebar;
 import org.testng.annotations.Test;
 import pages.*;
@@ -44,5 +46,10 @@ public class SmokeTest extends BaseTest {
                 .clickDeleteSubmitBtn();
 
         sidebar.assertProfileBtnNotVisible();
+    }
+    @Test
+    public void calendarTest () {
+        Calendar calendar = new Calendar();
+        calendar.navigateToDate();
     }
 }
