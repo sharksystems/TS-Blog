@@ -6,13 +6,13 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class RegisterPage extends BasePage {
+public class RegisterPage {
 
-    final By usernameField = By.xpath("//input[@id='user_login-742']");
-    final By emailField = By.xpath("//input[@id='user_email-742']");
-    final By passwordField = By.xpath("//input[@id='user_password-742']");
-    final By confirmPasswordField = By.xpath("//input[@id='confirm_user_password-742']");
-    final By registerSubmitBtn = By.xpath("//input[@id='um-submit-btn'][@value='Register']");
+    final By usernameField = By.id("user_login-742");
+    final By emailField = By.id("user_email-742");
+    final By passwordField = By.id("user_password-742");
+    final By confirmPasswordField = By.id("confirm_user_password-742");
+    final By submitBtn = By.id("um-submit-btn");
     final By loginFormBtn = By.xpath("//a[@class='um-button um-alt' and contains(.,'Login')]");
 
     public RegisterPage enterUserName (String username) {
@@ -36,12 +36,12 @@ public class RegisterPage extends BasePage {
     }
 
     public RegisterPage clickRegisterSubmitBtn () {
-        $(registerSubmitBtn).shouldBe(visible).click();
-        return this;
-    }
-    public RegisterPage clickFormLoginBtn () {
-        $(loginFormBtn).shouldBe(visible).click();
+        $(submitBtn).click();
         return this;
     }
 
+    public RegisterPage clickFormLoginBtn () {
+        $(loginFormBtn).click();
+        return this;
+    }
 }

@@ -1,4 +1,4 @@
-package utilities;
+package drivers;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;

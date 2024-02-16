@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ProfilePage extends BasePage {
+public class ProfilePage {
 
     By settingsMenuBtn = By.xpath("//i[@class = 'um-faicon-cog']");
     By myAccountMenuOption = By.xpath("//a[@class = 'real_url' and contains (., 'My Account')]");
