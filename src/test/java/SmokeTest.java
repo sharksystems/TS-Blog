@@ -43,7 +43,7 @@ public class SmokeTest extends BaseTest {
         new DeleteAccountModule()
                 .clickDeleteAccountBtn()
                 .fillPasswordField(user.getPassword())
-                .clickDeleteSubmitBtn();
+                .clickSubmitBtn();
 
         sidebar.assertProfileBtnNotVisible();
     }

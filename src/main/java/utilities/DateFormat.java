@@ -8,5 +8,5 @@ public class DateFormat {
     public static final DateTimeFormatter
             MMMM_YYYY = ofPattern("MMMM uuuu"),
             MMMM_D_YYYY = ofPattern("MMMM d, uuuu"),
-            D = ofPattern("d");
+            DAY = ofPattern("d");
 }

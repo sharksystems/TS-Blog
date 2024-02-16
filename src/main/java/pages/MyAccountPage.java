@@ -1,7 +1,5 @@
 package pages;
 
-import bases.BasePage;
-
-public class MyAccountPage extends BasePage {
+public class MyAccountPage {
 
 }

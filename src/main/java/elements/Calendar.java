@@ -20,7 +20,7 @@ public class Calendar {
 
     LocalDate date = LocalDate.of(2016, 8, 1);
     String monthYear = date.format(MMMM_YYYY);
-    String day = date.format(D);
+    String day = date.format(DAY);
     String monthDayYear = date.format(MMMM_D_YYYY);
 
     By calendarHeadingDate = By.xpath("//table[@id ='wp-calendar']//caption");

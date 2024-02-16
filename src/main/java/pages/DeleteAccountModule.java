@@ -19,7 +19,7 @@ public class DeleteAccountModule {
         $(deleteConfirmPasswordField).shouldBe(visible).sendKeys(password);
         return this;
     }
-    public DeleteAccountModule clickDeleteSubmitBtn () {
+    public DeleteAccountModule clickSubmitBtn () {
         $(deleteSubmitBtn).shouldBe(enabled).click();
         return this;
     }
