@@ -1,6 +1,5 @@
 
 import bases.BaseTest;
-import com.codeborne.selenide.Selenide;
 import elements.Calendar;
 import elements.Sidebar;
 import org.testng.annotations.Test;
@@ -46,6 +45,20 @@ public class SmokeTest extends BaseTest {
                 .clickSubmitBtn();
 
         sidebar.assertProfileBtnNotVisible();
+    }
+
+    @Test
+    public void quickPostTest() {
+        sidebar.clickLoginBtn();
+        new LoginPage().enterUsername("admin").enterPassword("admin").clickLoginSubmitBnt();
+        sidebar.clickAdminBtn();
+        sidebar.clickQuickPostBtn();
+        new QuickPostPage()
+                .enterPostTitle("Frontend test post")
+                .enterPostContent("Test Post Content")
+                .selectPostCategory("Lifestyle")
+                .selectPostTags("Lifestyle")
+                .clickPostSubmitBtn();
     }
     @Test
     public void calendarTest () {
