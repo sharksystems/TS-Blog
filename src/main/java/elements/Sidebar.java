@@ -12,39 +12,32 @@ public class Sidebar {
     private final By registerBtn = By.xpath("//span[@class='text-wrap' and contains(.,'Register')]");
     private final By quickPostBtn = By.xpath("//span[@class='text-wrap' and contains(.,'Quick Post')]");
     private final By logoutBtn = By.xpath("//span[@class='text-wrap'][contains(.,'Logout')]");
-    private final By adminSiteBtn = By.xpath("//li[@id = 'wp-admin-bar-site-name']");
+    private final By adminSiteBtn = By.id("wp-admin-bar-site-name");
 
-    public Sidebar clickProfileBtn() {
+    public void clickProfileBtn() {
         $(profileBtn).shouldBe(visible).click();
-        return this;
     }
 
-    public Sidebar clickRegisterBtn() {
+    public void clickRegisterBtn() {
         $(registerBtn).click();
-        return this;
     }
 
-    public Sidebar clickLoginBtn() {
+    public void clickLoginBtn() {
         $(loginBtn).shouldBe(visible).click();
-        return this;
     }
 
-    public Sidebar clickQuickPostBtn() {
+    public void clickQuickPostBtn() {
         $(quickPostBtn).shouldBe(visible).click();
-        return this;
     }
 
-    public Sidebar clickLogoutBtn() {
+    public void clickLogoutBtn() {
         $(logoutBtn).shouldBe(visible).click();
-        return this;
     }
-    public Sidebar clickAdminBtn() {
+    public void clickAdminBtn() {
         $(adminSiteBtn).shouldBe(visible).click();
-        return this;
     }
 
-    public Sidebar assertProfileBtnNotVisible() {
+    public void assertProfileBtnNotVisible() {
         Assert.assertFalse($(profileBtn).isDisplayed());
-        return this;
     }
 }
