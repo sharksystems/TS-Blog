@@ -1,23 +1,10 @@
 package Steps;
 import elements.Sidebar;
 import pages.*;
-import utilities.RandomUser;
 
 public class ManageUser {
 
-    String username;
-    String email;
-    String password;
-
-    public ManageUser () {
-        var user = new RandomUser();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-    }
-
-    public void registerUser () {
-
+    public ManageUser registerUser(String username, String email, String password) {
         new Sidebar().clickLoginBtn();
         new LoginPage().clickRegisterFormBtn();
         new RegisterPage()
@@ -26,22 +13,24 @@ public class ManageUser {
                 .enterPassword(password)
                 .enterConfirmPassword(password)
                 .clickRegisterSubmitBtn();
+        return this;
     }
 
-    public void login () {
-
+    public ManageUser login(String username, String password) {
         new Sidebar().clickLoginBtn();
         new LoginPage()
                 .enterUsername(username)
                 .enterPassword(password)
                 .clickLoginSubmitBnt();
+        return this;
     }
 
-    public void logout () {
+    public ManageUser logout() {
         new Sidebar().clickLogoutBtn();
+        return this;
     }
 
-    public void deleteUser () {
+    public ManageUser deleteUser(String password) {
         new Sidebar().clickProfileBtn();
         new ProfilePage()
                 .clickSettingsMenuBtn()
@@ -50,6 +39,6 @@ public class ManageUser {
                 .clickDeleteAccountBtn()
                 .fillPasswordField(password)
                 .clickSubmitBtn();
+        return this;
     }
-
 }

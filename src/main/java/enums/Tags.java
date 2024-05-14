@@ -1,8 +1,11 @@
 package enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
+
 public enum Tags {
 
     UNCATEGORIZED("Uncategorized"),
@@ -11,7 +14,4 @@ public enum Tags {
     FOOD("Food");
 
     private final String name;
-    Tags(String name) {
-        this.name = name;
-    }
 }

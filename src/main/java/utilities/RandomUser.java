@@ -17,5 +17,4 @@ public class RandomUser {
         this.email = faker.internet().emailAddress();
         this.password = "L" + faker.internet().password(true);
     }
-
 }

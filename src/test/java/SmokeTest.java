@@ -1,56 +1,52 @@
-
 import Steps.ManageUser;
 import bases.BaseTest;
 import elements.Calendar;
 import elements.Sidebar;
-import enums.Categories;
-import enums.Tags;
 import org.testng.annotations.Test;
-import pages.*;
-import utilities.RandomContent;
+import pages.QuickPostPage;
 import utilities.RandomUser;
+
+import static enums.Tags.LIFESTYLE;
 
 
 public class SmokeTest extends BaseTest {
 
     @Test
     public void registrationLogoutLogin() {
+        RandomUser randomUser = new RandomUser();
 
-        ManageUser manageUser = new ManageUser();
-        manageUser.registerUser();
-        manageUser.logout();
-        manageUser.login();
-        manageUser.deleteUser();
+        new ManageUser()
+                .registerUser(randomUser.getUsername(), randomUser.getEmail(), randomUser.getPassword())
+                .logout()
+                .login(randomUser.getUsername(), randomUser.getPassword())
+                .deleteUser(randomUser.getPassword());
     }
 
     @Test
     public void quickPostTest() {
-
+        RandomUser randomUser = new RandomUser();
         ManageUser manageUser = new ManageUser();
         Sidebar sidebar = new Sidebar();
-        var content = new RandomContent();
 
-        manageUser.registerUser();
-
+        manageUser.registerUser(randomUser.getUsername(), randomUser.getEmail(), randomUser.getPassword());
         sidebar.clickQuickPostBtn();
 
         new QuickPostPage()
-                .enterPostTitle(content.getPostTitle())
-                .enterPostContent(content.getPostContent())
+                .enterPostTitle(faker.lorem().sentence(5))
+                .enterPostContent(faker.lorem().paragraph(20))
                 .clickCategorySelectField()
-                .selectOption(Categories.LIFESTYLE.getName())
+                .selectOption(LIFESTYLE.getName())
                 .clickTagsSelectField()
-                .selectOption(Tags.LIFESTYLE.getName())
+                .selectOption(LIFESTYLE.getName())
                 .clickPostSubmitBtn()
                 .assertSuccessfulQuickPost();
 
-        manageUser.deleteUser();
+        manageUser.deleteUser(randomUser.getPassword());
         sidebar.assertProfileBtnNotVisible();
-
     }
 
     @Test
-    public void calendarTest () {
+    public void calendarTest() {
         Calendar calendar = new Calendar();
         calendar.navigateToDate();
     }
