@@ -1,54 +1,52 @@
-
+import Steps.ManageUser;
 import bases.BaseTest;
-import com.codeborne.selenide.Selenide;
 import elements.Calendar;
 import elements.Sidebar;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.QuickPostPage;
 import utilities.RandomUser;
+
+import static enums.Tags.LIFESTYLE;
 
 
 public class SmokeTest extends BaseTest {
-    Sidebar sidebar = new Sidebar();
 
     @Test
     public void registrationLogoutLogin() {
-        var user = new RandomUser();
+        RandomUser randomUser = new RandomUser();
 
-        sidebar.clickLoginBtn();
+        new ManageUser()
+                .registerUser(randomUser.getUsername(), randomUser.getEmail(), randomUser.getPassword())
+                .logout()
+                .login(randomUser.getUsername(), randomUser.getPassword())
+                .deleteUser(randomUser.getPassword());
+    }
 
-        new LoginPage().clickRegisterFormBtn();
+    @Test
+    public void quickPostTest() {
+        RandomUser randomUser = new RandomUser();
+        ManageUser manageUser = new ManageUser();
+        Sidebar sidebar = new Sidebar();
 
-        new RegisterPage()
-                .enterUserName(user.getUsername())
-                .enterEmail(user.getEmail())
-                .enterPassword(user.getPassword())
-                .enterConfirmPassword(user.getPassword())
-                .clickRegisterSubmitBtn();
+        manageUser.registerUser(randomUser.getUsername(), randomUser.getEmail(), randomUser.getPassword());
+        sidebar.clickQuickPostBtn();
 
-        sidebar.clickLogoutBtn()
-                .clickLoginBtn();
+        new QuickPostPage()
+                .enterPostTitle(faker.lorem().sentence(5))
+                .enterPostContent(faker.lorem().paragraph(20))
+                .clickCategorySelectField()
+                .selectOption(LIFESTYLE.getName())
+                .clickTagsSelectField()
+                .selectOption(LIFESTYLE.getName())
+                .clickPostSubmitBtn()
+                .assertSuccessfulQuickPost();
 
-        new LoginPage()
-                .enterUsername(user.getUsername())
-                .enterPassword(user.getPassword())
-                .clickLoginSubmitBnt();
-
-        sidebar.clickProfileBtn();
-
-        new ProfilePage()
-                .clickSettingsMenuBtn()
-                .clickMyAccountMenuOption();
-
-        new DeleteAccountModule()
-                .clickDeleteAccountBtn()
-                .fillPasswordField(user.getPassword())
-                .clickSubmitBtn();
-
+        manageUser.deleteUser(randomUser.getPassword());
         sidebar.assertProfileBtnNotVisible();
     }
+
     @Test
-    public void calendarTest () {
+    public void calendarTest() {
         Calendar calendar = new Calendar();
         calendar.navigateToDate();
     }
